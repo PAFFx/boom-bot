@@ -3,7 +3,7 @@
 
   <!-- INCLUDE -->
   <xacro:include filename="materials.xacro" />
-  <xacro:include filename="constants.xacro" />
+  <xacro:include filename="frame_properties.xacro" />
   <xacro:include filename="inertial_macros.xacro" />
 
   <!-- BASE LINK-->
