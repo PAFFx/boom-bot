@@ -1,33 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <!-- material -->
-  <material name="white">
-    <color rgba="1 1 1 1" />
-  </material>
+  <xacro:include filename="materials.xacro" />
 
-  <material name="orange">
-    <color rgba="1 0.3 0.1 1" />
-  </material>
-
-  <material name="blue">
-    <color rgba="0.2 0.2 1 1" />
-  </material>
-
-  <material name="black">
-    <color rgba="0 0 0 1" />
-  </material>
-
-  <!-- SIZE -->
-  <xacro:property name="x_chassis_size" value="0.5" />
-  <xacro:property name="y_chassis_size" value="0.42" />
-  <xacro:property name="z_chassis_size" value="0.14" />
-
-  <xacro:property name="drive_wheel_radius" value="0.102" />
-  <xacro:property name="drive_wheel_length" value="0.04" />
-
-  <xacro:property name="caster_wheel_radius" value="0.065" />
-  <xacro:property name="caster_wheel_length" value="0.02" />
 
   <!-- BASE LINK-->
   <link name="base_link">
