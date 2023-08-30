@@ -26,6 +26,9 @@
   <xacro:property name="drive_wheel_radius" value="0.102" />
   <xacro:property name="drive_wheel_length" value="0.04" />
 
+  <xacro:property name="caster_wheel_radius" value="0.065" />
+  <xacro:property name="caster_wheel_length" value="0.02" />
+
   <!-- BASE LINK-->
   <link name="base_link">
 
@@ -82,6 +85,47 @@
         <cylinder radius="${drive_wheel_radius}" length="${drive_wheel_length}" />
       </geometry>
       <material name="blue" />
+    </visual>
+  </link>
+
+
+  <!-- LEFT CASTER WHEELS -->
+  <joint name="left_caster_wheel_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="left_caster_wheel" />
+    <origin
+      xyz="${2*x_chassis_size /6} ${2*y_chassis_size/5} -${drive_wheel_radius - caster_wheel_radius}"
+      rpy="-${pi/2} 0 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+
+
+  <link name="left_caster_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="${caster_wheel_radius}" length="${caster_wheel_length}" />
+      </geometry>
+      <material name="black" />
+    </visual>
+  </link>
+
+  <!-- RIGHT CASTER WHEELS -->
+  <joint name="right_caster_wheel_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="right_caster_wheel" />
+    <origin
+      xyz="${2*x_chassis_size /6} -${2*y_chassis_size/5} -${drive_wheel_radius - caster_wheel_radius}"
+      rpy="${pi/2} 0 0" />
+    <axis xyz="0 0 -1" />
+  </joint>
+
+
+  <link name="right_caster_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="${caster_wheel_radius}" length="${caster_wheel_length}" />
+      </geometry>
+      <material name="black" />
     </visual>
   </link>
 </robot>
