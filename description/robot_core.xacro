@@ -36,12 +36,12 @@
   <joint name="chassis_joint" type="fixed">
     <parent link="base_link" />
     <child link="chassis" />
-    <origin xyz="-0.1 0 0 " />
+    <origin xyz="0 0 0 " />
   </joint>
 
   <link name="chassis">
     <visual>
-      <origin xyz="${x_chassis_size/2} 0 ${z_chassis_size/2}" />
+      <origin xyz="0 0 ${z_chassis_size/2}" />
       <geometry>
         <box size="${x_chassis_size} ${y_chassis_size} ${z_chassis_size}" />
       </geometry>
