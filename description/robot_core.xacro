@@ -50,6 +50,14 @@
       </geometry>
       <material name="white" />
     </visual>
+
+    <collision>
+      <origin xyz="0 0 ${z_chassis_size/2}" />
+      <geometry>
+        <box size="${x_chassis_size} ${y_chassis_size} ${z_chassis_size}" />
+      </geometry>
+    </collision>
+
   </link>
 
 
@@ -68,6 +76,12 @@
       </geometry>
       <material name="blue" />
     </visual>
+
+    <collision>
+      <geometry>
+        <cylinder radius="${drive_wheel_radius}" length="${drive_wheel_length}" />
+      </geometry>
+    </collision>
   </link>
 
 
@@ -86,6 +100,13 @@
       </geometry>
       <material name="blue" />
     </visual>
+
+    <collision>
+      <geometry>
+        <cylinder radius="${drive_wheel_radius}" length="${drive_wheel_length}" />
+      </geometry>
+    </collision>
+
   </link>
 
 
@@ -107,6 +128,13 @@
       </geometry>
       <material name="black" />
     </visual>
+
+    <collision>
+      <geometry>
+        <cylinder radius="${caster_wheel_radius}" length="${caster_wheel_length}" />
+      </geometry>
+    </collision>
+
   </link>
 
   <!-- RIGHT CASTER WHEELS -->
@@ -127,5 +155,12 @@
       </geometry>
       <material name="black" />
     </visual>
+
+    <collision>
+      <geometry>
+        <cylinder radius="${caster_wheel_radius}" length="${caster_wheel_length}" />
+      </geometry>
+    </collision>
+
   </link>
 </robot>
