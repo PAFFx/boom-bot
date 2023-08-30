@@ -31,7 +31,7 @@
   <!-- When not using Gazebo, we'll need to run `ros2 run controller_manager ros2_control_node` -->
   <gazebo>
     <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-      <parameters>$(find boom-bot)/config/my_controllers.yaml</parameters>
+      <parameters>$(find boom_bot)/config/my_controllers.yaml</parameters>
     </plugin>
   </gazebo>
 
