@@ -2,8 +2,8 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!-- INCLUDE -->
-  <xacro:include filename="materials.xacro" />
-  <xacro:include filename="constants.xacro" />
+  <xacro:include filename="settings/materials.xacro" />
+  <xacro:include filename="settings/frame_properties.xacro" />
   <xacro:include filename="inertial_macros.xacro" />
 
   <!-- BASE LINK-->
@@ -42,6 +42,10 @@
 
   </link>
 
+  <gazebo reference="chassis">
+    <material>Gazebo/White</material>
+  </gazebo>
+
 
   <!-- LEFT WHEEL -->
   <joint name="left_wheel_joint" type="continuous">
@@ -71,6 +75,9 @@
     </xacro:inertial_cylinder>
   </link>
 
+  <gazebo reference="left_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
 
   <!-- RIGHT WHEEL -->
   <joint name="right_wheel_joint" type="continuous">
@@ -101,11 +108,14 @@
 
   </link>
 
+  <gazebo reference="right_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
 
-  <!-- LEFT CASTER WHEELS -->
-  <joint name="left_caster_wheel_joint" type="fixed">
+  <!-- FRONT LEFT CASTER WHEELS -->
+  <joint name="front_left_caster_wheel_joint" type="fixed">
     <parent link="base_link" />
-    <child link="left_caster_wheel" />
+    <child link="front_left_caster_wheel" />
     <origin
       xyz="${2*x_chassis_size /6} ${2*y_chassis_size/5} -${drive_wheel_radius - caster_wheel_radius}"
       rpy="-${pi/2} 0 0" />
@@ -113,7 +123,7 @@
   </joint>
 
 
-  <link name="left_caster_wheel">
+  <link name="front_left_caster_wheel">
     <visual>
       <geometry>
         <cylinder radius="${caster_wheel_radius}" length="${caster_wheel_length}" />
@@ -134,10 +144,16 @@
 
   </link>
 
-  <!-- RIGHT CASTER WHEELS -->
-  <joint name="right_caster_wheel_joint" type="fixed">
+  <gazebo reference="front_left_caster_wheel">
+    <material>Gazebo/Black</material>
+    <mu1 value="0.001" />
+    <mu2 value="0.001" />
+  </gazebo>
+
+  <!-- FRONT RIGHT CASTER WHEELS -->
+  <joint name="front_right_caster_wheel_joint" type="fixed">
     <parent link="base_link" />
-    <child link="right_caster_wheel" />
+    <child link="front_right_caster_wheel" />
     <origin
       xyz="${2*x_chassis_size /6} -${2*y_chassis_size/5} -${drive_wheel_radius - caster_wheel_radius}"
       rpy="${pi/2} 0 0" />
@@ -145,7 +161,7 @@
   </joint>
 
 
-  <link name="right_caster_wheel">
+  <link name="front_right_caster_wheel">
     <visual>
       <geometry>
         <cylinder radius="${caster_wheel_radius}" length="${caster_wheel_length}" />
@@ -165,4 +181,86 @@
     </xacro:inertial_cylinder>
 
   </link>
+
+  <gazebo reference="front_right_caster_wheel">
+    <material>Gazebo/Black</material>
+    <mu1 value="0.001" />
+    <mu2 value="0.001" />
+  </gazebo>
+
+  <!-- BACK LEFT CASTER WHEELS -->
+  <joint name="back_left_caster_wheel_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="back_left_caster_wheel" />
+    <origin
+      xyz="-${2*x_chassis_size /6} ${2*y_chassis_size/5} -${drive_wheel_radius - caster_wheel_radius}"
+      rpy="-${pi/2} 0 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+
+
+  <link name="back_left_caster_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="${caster_wheel_radius}" length="${caster_wheel_length}" />
+      </geometry>
+      <material name="black" />
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder radius="${caster_wheel_radius}" length="${caster_wheel_length}" />
+      </geometry>
+    </collision>
+
+    <xacro:inertial_cylinder mass="${caster_wheel_mass}" length="${caster_wheel_length}"
+      radius="${caster_wheel_radius}">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+
+  </link>
+
+  <gazebo reference="back_left_caster_wheel">
+    <material>Gazebo/Black</material>
+    <mu1 value="0.001" />
+    <mu2 value="0.001" />
+  </gazebo>
+
+  <!-- BACK RIGHT CASTER WHEELS -->
+  <joint name="back_right_caster_wheel_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="back_right_caster_wheel" />
+    <origin
+      xyz="-${2*x_chassis_size /6} -${2*y_chassis_size/5} -${drive_wheel_radius - caster_wheel_radius}"
+      rpy="${pi/2} 0 0" />
+    <axis xyz="0 0 -1" />
+  </joint>
+
+
+  <link name="back_right_caster_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="${caster_wheel_radius}" length="${caster_wheel_length}" />
+      </geometry>
+      <material name="black" />
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder radius="${caster_wheel_radius}" length="${caster_wheel_length}" />
+      </geometry>
+    </collision>
+
+    <xacro:inertial_cylinder mass="${caster_wheel_mass}" length="${caster_wheel_length}"
+      radius="${caster_wheel_radius}">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+
+  </link>
+
+  <gazebo reference="back_right_caster_wheel">
+    <material>Gazebo/Black</material>
+    <mu1 value="0.001" />
+    <mu2 value="0.001" />
+  </gazebo>
 </robot>
