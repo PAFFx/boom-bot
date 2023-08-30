@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <!-- material -->
   <material name="white">
     <color rgba="1 1 1 1" />
   </material>
@@ -16,4 +17,29 @@
   <material name="black">
     <color rgba="0 0 0 1" />
   </material>
+
+
+  <!-- BASE LINK-->
+  <link name="base_link">
+
+  </link>
+
+
+  <!-- CHASSIS LINK -->
+  <joint name="chassis_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="chassis" />
+    <origin xyz="-0.1 0 0 " />
+  </joint>
+
+  <link name="chassis">
+    <visual>
+      <origin xyz="0.25 0 0.07" />
+      <geometry>
+        <box size="0.5 0.42 0.14" />
+      </geometry>
+      <material name="white" />
+    </visual>
+  </link>
+
 </robot>
