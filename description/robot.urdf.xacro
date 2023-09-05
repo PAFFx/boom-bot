@@ -5,6 +5,7 @@
     <xacro:arg name="user_ros2_control" default="true" />
 
     <xacro:include filename="robot_core.xacro" />
+    <xacro:include filename="lidar.xacro" />
 
 
     <xacro:if value="$(arg use_ros2_control)">
