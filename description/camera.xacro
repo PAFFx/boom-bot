@@ -6,7 +6,7 @@
   <joint name="camera_joint" type="fixed">
     <parent link="chassis" />
     <child link="camera_link" />
-    <origin xyz="${(4*x_chassis_size) / 10} 0 ${z_chassis_size}" rpy="0 0 0 " />
+    <origin xyz="${x_chassis_size/2} 0 ${z_chassis_size}" rpy="0 0 0 " />
   </joint>
 
   <link name="camera_link">

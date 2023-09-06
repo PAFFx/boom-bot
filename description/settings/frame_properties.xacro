@@ -31,8 +31,8 @@
   <xacro:property name="horizontal_fov" value="1.089" />
   <xacro:property name="camera_frame_width" value="1280" />
   <xacro:property name="camera_frame_height" value="720" />
-  <xacro:property name="max_view_range" value="0.05" />
-  <xacro:property name="min_view_range" value="8.0" />
+  <xacro:property name="min_view_range" value="0.05" />
+  <xacro:property name="max_view_range" value="8.0" />
 
 
   <!-- SPEED -->
