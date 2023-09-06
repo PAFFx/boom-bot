@@ -44,15 +44,15 @@
       <visualize>true</visualize>
       <update_rate>10</update_rate>
       <camera>
-        <horizontal_fov>1.089</horizontal_fov>
+        <horizontal_fov>${horizontal_fov}</horizontal_fov>
         <image>
           <format>R8G8B8</format>
-          <width>1280</width>
-          <height>720</height>
+          <width>${frame_width}</width>
+          <height>${frame_height}</height>
         </image>
         <clip>
-          <near>0.05</near>
-          <far>8.0</far>
+          <near>${min_view_range}</near>
+          <far>${max_view_range}</far>
         </clip>
       </camera>
 
