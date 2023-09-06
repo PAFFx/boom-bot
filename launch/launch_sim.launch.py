@@ -3,8 +3,9 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription,DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import LaunchConfiguration
 
 from launch_ros.actions import Node
 
@@ -12,6 +13,9 @@ from launch_ros.actions import Node
 def generate_launch_description():
     package_name = "boom_bot"
 
+    # Check if we're told to use sim time
+    use_sim_time = LaunchConfiguration('use_sim_time')
+    use_ros2_control = LaunchConfiguration('use_ros2_control')
 
     rsp = IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
@@ -19,7 +23,7 @@ def generate_launch_description():
                     get_package_share_directory(package_name), "launch","rsp.launch.py"
                     )]
             ),
-            launch_arguments={"use_sim_time":"true", "use_ros2_control":'true'}.items()
+            launch_arguments={"use_sim_time":use_sim_time, "use_ros2_control":use_ros2_control}.items()
         )
 
     gazebo_params_file = os.path.join(
@@ -55,10 +59,18 @@ def generate_launch_description():
             )
 
     return LaunchDescription([
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value='true',
+            description='Use sim time if true'),
+        DeclareLaunchArgument(
+            'use_ros2_control',
+            default_value='true',
+            description='Use sim time if true'),
         rsp,
         gazebo,
         spawn_entity,
         diff_drive_spawner,
-        joint_broad_spawner
+        joint_broad_spawner,
         ])
 
