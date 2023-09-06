@@ -47,8 +47,8 @@
         <horizontal_fov>${horizontal_fov}</horizontal_fov>
         <image>
           <format>R8G8B8</format>
-          <width>${frame_width}</width>
-          <height>${frame_height}</height>
+          <width>${camera_frame_width}</width>
+          <height>${camera_frame_height}</height>
         </image>
         <clip>
           <near>${min_view_range}</near>
