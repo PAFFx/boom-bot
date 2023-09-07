@@ -33,6 +33,9 @@
   <xacro:property name="camera_frame_height" value="720" />
   <xacro:property name="min_view_range" value="0.05" />
   <xacro:property name="max_view_range" value="8.0" />
+  <!-- DEPTH-->
+  <xacro:property name="min_depth" value="0.1" />
+  <xacro:property name="max_depth" value="100.0" />
 
 
   <!-- SPEED -->
