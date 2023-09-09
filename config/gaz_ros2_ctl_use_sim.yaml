@@ -1,7 +1,7 @@
 controller_manager:
   ros__parameters:
     update_rate: 30
-    use_sim_time: false
+    use_sim_time: true
 
     diff_cont:
       type: diff_drive_controller/DiffDriveController
@@ -22,7 +22,7 @@ diff_cont:
 
     use_stamped_vel: false
 
-    open_loop: true
+    # open_loop: false
 
     # wheels_per_side: x
     # wheel_separation_multiplier: x
