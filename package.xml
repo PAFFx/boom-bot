@@ -14,8 +14,22 @@
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
-  <exec_depend>hls_lfcd_lds_driver</exec_depend>
+
   <exec_depend>xacro</exec_depend>
+
+  <!-- DRIVERS-->
+  <exec_depend>hls_lfcd_lds_driver</exec_depend>
+
+  <!-- CONTROL -->
+  <exec_depend>teleop_twist_joy</exec_depend>
+  <exec_depend>teleop_twist_keyboard</exec_depend>
+
+  <!-- NAVIGATION -->
+  <exec_depend>navigation2</exec_depend>
+  <exec_depend>twist_mux</exec_depend>
+
+  <!-- SLAM -->
+  <exec_depend>slam_toolbox</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
