@@ -21,7 +21,7 @@ def generate_launch_description():
                     get_package_share_directory(package_name), "launch","rsp.launch.py"
                     )]
             ),
-            launch_arguments={"use_sim_time":"false", "use_ros2_control":"true"}.items()
+            launch_arguments={"sim_mode":"false", "use_ros2_control":"true"}.items()
         )
 
     robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])

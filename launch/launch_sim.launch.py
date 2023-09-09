@@ -14,7 +14,6 @@ def generate_launch_description():
     package_name = "boom_bot"
 
     # Check if we're told to use sim time
-    use_sim_time = LaunchConfiguration('use_sim_time')
     use_ros2_control = LaunchConfiguration('use_ros2_control')
 
     rsp = IncludeLaunchDescription(
@@ -23,7 +22,7 @@ def generate_launch_description():
                     get_package_share_directory(package_name), "launch","rsp.launch.py"
                     )]
             ),
-            launch_arguments={"use_sim_time":use_sim_time, "use_ros2_control":use_ros2_control}.items()
+            launch_arguments={"use_ros2_control":use_ros2_control, "sim_mode":'true'}.items()
         )
 
     gazebo_params_file = os.path.join(
@@ -60,13 +59,9 @@ def generate_launch_description():
 
     return LaunchDescription([
         DeclareLaunchArgument(
-            'use_sim_time',
-            default_value='true',
-            description='Use sim time if true'),
-        DeclareLaunchArgument(
             'use_ros2_control',
             default_value='true',
-            description='Use sim time if true'),
+            description='use gazebo control if set to false'),
         rsp,
         gazebo,
         spawn_entity,
