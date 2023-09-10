@@ -23,10 +23,10 @@
   <!-- CONTROL -->
   <exec_depend>teleop_twist_joy</exec_depend>
   <exec_depend>teleop_twist_keyboard</exec_depend>
+  <exec_depend>twist_mux</exec_depend>
 
   <!-- NAVIGATION -->
   <exec_depend>navigation2</exec_depend>
-  <exec_depend>twist_mux</exec_depend>
 
   <!-- SLAM -->
   <exec_depend>slam_toolbox</exec_depend>
