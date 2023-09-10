@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /Map2
       Splitter Ratio: 0.5
     Tree Height: 539
   - Class: rviz_common/Selection
@@ -230,9 +231,9 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 0
+      Max Intensity: -999999
       Min Color: 0; 0; 0
-      Min Intensity: 0
+      Min Intensity: 999999
       Name: LaserScan
       Position Transformer: XYZ
       Selectable: true
@@ -275,13 +276,13 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /local_costmap/costmap
+        Value: /global_costmap/costmap
       Update Topic:
         Depth: 5
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /local_costmap/costmap_updates
+        Value: /global_costmap/costmap_updates
       Use Timestamp: false
       Value: true
   Enabled: true
@@ -339,11 +340,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 55.73954391479492
+      Scale: 85.37967681884766
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 0.8154382705688477
-      Y: -0.022364765405654907
+      X: -0.06294143944978714
+      Y: -0.11005766689777374
     Saved: ~
 Window Geometry:
   Displays:
