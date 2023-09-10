@@ -41,7 +41,7 @@
   <!-- SPEED -->
   <xacro:property name="max_wheel_torque" value="100" />
   <xacro:property name="max_acceleration" value="5.0" />
-  <xacro:property name="wheel_max_speed" value="100.0" />
-  <xacro:property name="wheel_min_speed" value="-100.0" />
+  <xacro:property name="wheel_max_speed" value="275.0" />
+  <xacro:property name="wheel_min_speed" value="-275.0" />
 
 </robot>
