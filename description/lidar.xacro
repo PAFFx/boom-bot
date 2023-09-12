@@ -4,9 +4,9 @@
 
   <!-- LASER -->
   <joint name="laser_joint" type="fixed">
-    <parent link="chassis" />
+    <parent link="handle" />
     <child link="laser_frame" />
-    <origin xyz="0 0 ${9*z_chassis_size/8}" rpy="0 0 0 " />
+    <origin xyz="0 0 ${z_handle_size + 0.02}" rpy="0 0 0 " />
   </joint>
 
   <link name="laser_frame">
