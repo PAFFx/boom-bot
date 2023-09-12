@@ -58,11 +58,11 @@
 
 
   <!-- SPEED -->
-  <xacro:property name="max_wheel_torque" value="100" />
-  <xacro:property name="max_acceleration" value="5.0" />
+  <xacro:property name="max_wheel_torque" value="0.883" />
+  <xacro:property name="max_acceleration" value="1.48" />
 
   <!-- ROTATION SPEED -->
-  <xacro:property name="wheel_max_speed" value="4.18" />
-  <xacro:property name="wheel_min_speed" value="-4.18" />
+  <xacro:property name="wheel_max_speed" value="1.848" />
+  <xacro:property name="wheel_min_speed" value="-1.848" />
 
 </robot>
