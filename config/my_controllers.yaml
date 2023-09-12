@@ -24,7 +24,7 @@ diff_cont:
 
     open_loop: true
 
-    # wheels_per_side: x
+    wheels_per_side: 1
     # wheel_separation_multiplier: x
     # left_wheel_radius_multiplier: x
     # right_wheel_radius_multiplier: x
