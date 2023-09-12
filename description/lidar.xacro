@@ -2,12 +2,42 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 
+  <!-- LASER BASE -->
+  <joint name="laser_base_joint" type="fixed">
+    <parent link="handle" />
+    <child link="laser_base_frame" />
+    <origin xyz="${x_handle_size} 0 ${13*z_handle_size/20}" rpy="0 0 0 " />
+  </joint>
+
+  <link name="laser_base_frame">
+    <visual>
+      <geometry>
+        <box size="${x_lidar_base_size} ${y_lidar_base_size} ${z_lidar_base_size}" />
+      </geometry>
+      <material name="red" />
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${x_lidar_base_size} ${y_lidar_base_size} ${z_lidar_base_size}" />
+      </geometry>
+    </collision>
+    <xacro:inertial_box mass="${motor_mass}" x="${x_lidar_base_size}" y="${y_lidar_base_size}"
+      z="${z_lidar_base_size}">
+      <origin xyz="0 0 0" />
+    </xacro:inertial_box>
+  </link>
+
+  <gazebo reference="laser_base_frame">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
   <!-- LASER -->
   <joint name="laser_joint" type="fixed">
-    <parent link="handle" />
+    <parent link="laser_base_frame" />
     <child link="laser_frame" />
-    <origin xyz="0 0 ${z_handle_size + 0.02}" rpy="0 0 0 " />
+    <origin xyz="0 0 ${z_lidar_base_size}" rpy="0 0 0 " />
   </joint>
+
 
   <link name="laser_frame">
     <visual>
