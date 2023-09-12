@@ -38,8 +38,8 @@
   <xacro:property name="lidar_mass" value="0.1" />
   <xacro:property name="lidar_samples" value="360" />
   <xacro:property name="lidar_resolution" value="0.0174533" />
-  <xacro:property name="lidar_min_angle" value="-3.14" />
-  <xacro:property name="lidar_max_angle" value="3.14" />
+  <xacro:property name="lidar_min_angle" value="-1.57" />
+  <xacro:property name="lidar_max_angle" value="1.57" />
   <xacro:property name="lidar_min_range" value="0.12" />
   <xacro:property name="lidar_max_range" value="3.5" />
   <xacro:property name="lidar_range_resolution" value="0.01" />
