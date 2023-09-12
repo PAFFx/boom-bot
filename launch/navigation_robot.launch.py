@@ -43,6 +43,9 @@ def generate_launch_description():
                 [os.path.join(
                     get_package_share_directory(package_name), "launch","localization.launch.py"
                     )],
+            launch_arguments={"map":os.path.join(
+                get_package_share_directory(package_name), "maps", "real_map_save.yaml"
+                )}.items()
             )
 
     navigation = IncludeLaunchDescription(
