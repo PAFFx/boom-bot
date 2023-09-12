@@ -80,7 +80,7 @@
   </link>
 
   <!-- LEFT MOTOR -->
-  <joint name="left_motor_joint" type="continuous">
+  <joint name="left_motor_joint" type="fixed">
     <parent link="base_link" />
     <child link="left_motor" />
     <origin xyz="-${2*x_chassis_size /6} -${y_chassis_size/2} 0"
@@ -145,7 +145,7 @@
   </gazebo>
 
   <!-- RIGHT MOTOR -->
-  <joint name="right_motor_joint" type="continuous">
+  <joint name="right_motor_joint" type="fixed">
     <parent link="base_link" />
     <child link="right_motor" />
     <origin xyz="-${2*x_chassis_size /6} ${y_chassis_size/2} 0"
