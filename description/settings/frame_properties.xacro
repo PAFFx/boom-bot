@@ -21,6 +21,13 @@
   <xacro:property name="lidar_frame_radius" value="0.05" />
   <xacro:property name="lidar_frame_length" value="0.04" />
   <xacro:property name="lidar_mass" value="0.1" />
+  <xacro:property name="lidar_samples" value="360" />
+  <xacro:property name="lidar_resolution" value="1" />
+  <xacro:property name="lidar_min_angle" value="-3.14" />
+  <xacro:property name="lidar_max_angle" value="3.14" />
+  <xacro:property name="lidar_min_range" value="0.3" />
+  <xacro:property name="lidar_max_range" value="12" />
+  <xacro:property name="lidar_range_resolution" value="0.01" />
 
   <!-- CAMERA -->
   <xacro:property name="x_camera_size" value="0.05" />
