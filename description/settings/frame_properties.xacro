@@ -17,6 +17,13 @@
   <xacro:property name="drive_wheel_length" value="0.04" />
   <xacro:property name="drive_wheel_mass" value="2" />
 
+  <!-- MOTOR -->
+  <xacro:property name="x_motor_size" value="0.05" />
+  <xacro:property name="y_motor_size" value="0.05" />
+  <xacro:property name="z_motor_size" value="0.05" />
+  <xacro:property name="motor_mass" value="1" />
+
+
   <!-- CASTER WHEELS-->
   <xacro:property name="caster_wheel_radius" value="0.055" />
   <xacro:property name="caster_wheel_length" value="0.02" />
