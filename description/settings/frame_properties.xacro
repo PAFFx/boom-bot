@@ -5,15 +5,20 @@
   <xacro:property name="x_chassis_size" value="0.5" />
   <xacro:property name="y_chassis_size" value="0.42" />
   <xacro:property name="z_chassis_size" value="0.14" />
-  <xacro:property name="chassis_mass" value="6" />
+  <xacro:property name="chassis_mass" value="4.4" />
+  <xacro:property name="x_handle_size" value="0.13" />
+  <xacro:property name="y_handle_size" value="0.42" />
+  <xacro:property name="z_handle_size" value="0.8" />
+  <xacro:property name="handle_mass" value="3" />
+
 
   <!-- DRIVE WHEELS-->
   <xacro:property name="drive_wheel_radius" value="0.102" />
   <xacro:property name="drive_wheel_length" value="0.04" />
-  <xacro:property name="drive_wheel_mass" value="3" />
+  <xacro:property name="drive_wheel_mass" value="2" />
 
   <!-- CASTER WHEELS-->
-  <xacro:property name="caster_wheel_radius" value="0.065" />
+  <xacro:property name="caster_wheel_radius" value="0.055" />
   <xacro:property name="caster_wheel_length" value="0.02" />
   <xacro:property name="caster_wheel_mass" value="1" />
 
@@ -50,7 +55,7 @@
   <xacro:property name="max_acceleration" value="5.0" />
 
   <!-- ROTATION SPEED -->
-  <xacro:property name="wheel_max_speed" value="4.18" /> 
+  <xacro:property name="wheel_max_speed" value="4.18" />
   <xacro:property name="wheel_min_speed" value="-4.18" />
 
 </robot>

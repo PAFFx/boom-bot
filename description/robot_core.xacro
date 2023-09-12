@@ -48,9 +48,36 @@
 
   </link>
 
-  <gazebo reference="chassis">
-    <material>Gazebo/White</material>
-  </gazebo>
+
+  <!-- HANDLE -->
+  <joint name="handle_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="handle" />
+    <origin xyz="-${x_chassis_size/2 + x_handle_size/2} 0 0" />
+  </joint>
+
+  <link name="handle">
+    <visual>
+      <origin xyz="0 0 ${z_handle_size/2}" />
+      <geometry>
+        <box size="${x_handle_size} ${y_handle_size} ${z_handle_size}" />
+      </geometry>
+      <material name="white" />
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 ${z_handle_size/2}" />
+      <geometry>
+        <box size="${x_handle_size} ${y_handle_size} ${z_handle_size}" />
+      </geometry>
+    </collision>
+
+    <xacro:inertial_box mass="${handle_mass}" x="${x_handle_size}" y="${y_handle_size}"
+      z="${z_handle_size}">
+      <origin xyz="0 0 0" />
+    </xacro:inertial_box>
+
+  </link>
 
 
   <!-- LEFT WHEEL -->
