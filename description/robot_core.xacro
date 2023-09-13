@@ -48,16 +48,75 @@
 
   </link>
 
-  <gazebo reference="chassis">
-    <material>Gazebo/White</material>
-  </gazebo>
+
+  <!-- HANDLE -->
+  <joint name="handle_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="handle" />
+    <origin xyz="${-x_chassis_size/2} 0 0" />
+  </joint>
+
+  <link name="handle">
+    <visual>
+      <origin xyz="0 0 ${z_handle_size/2}" />
+      <geometry>
+        <box size="${x_handle_size} ${y_handle_size} ${z_handle_size}" />
+      </geometry>
+      <material name="white" />
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 ${z_handle_size/2}" />
+      <geometry>
+        <box size="${x_handle_size} ${y_handle_size} ${z_handle_size}" />
+      </geometry>
+    </collision>
+
+    <xacro:inertial_box mass="${handle_mass}" x="${x_handle_size}" y="${y_handle_size}"
+      z="${z_handle_size}">
+      <origin xyz="0 0 0" />
+    </xacro:inertial_box>
+
+  </link>
+
+  <!-- LEFT MOTOR -->
+  <joint name="left_motor_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="left_motor" />
+    <origin xyz="-${2*x_chassis_size /6} -${y_chassis_size/2} 0"
+      rpy="0 0 0" />
+    <axis xyz="0 0 -1" />
+  </joint>
+
+  <link name="left_motor">
+    <visual>
+      <geometry>
+        <box size="${x_motor_size} ${y_motor_size} ${z_motor_size}" />
+      </geometry>
+      <material name="blue" />
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 ${z_motor_size/2}" />
+      <geometry>
+        <box size="${x_motor_size} ${y_motor_size} ${z_motor_size}" />
+      </geometry>
+    </collision>
+
+    <xacro:inertial_box mass="${motor_mass}" x="${x_motor_size}" y="${y_motor_size}"
+      z="${z_motor_size}">
+      <origin xyz="0 0 ${z_motor_size/2}" />
+    </xacro:inertial_box>
+
+  </link>
 
 
   <!-- LEFT WHEEL -->
   <joint name="left_wheel_joint" type="continuous">
-    <parent link="base_link" />
+    <parent link="left_motor" />
     <child link="left_wheel" />
-    <origin xyz="0 ${y_chassis_size/2 + drive_wheel_length/2} 0" rpy="-${pi/2} 0 0" />
+    <origin xyz="0 ${-y_motor_size} 0"
+      rpy="-${pi/2} 0 0" />
     <axis xyz="0 0 1" />
   </joint>
 
@@ -85,11 +144,44 @@
     <material>Gazebo/Blue</material>
   </gazebo>
 
+  <!-- RIGHT MOTOR -->
+  <joint name="right_motor_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="right_motor" />
+    <origin xyz="-${2*x_chassis_size /6} ${y_chassis_size/2} 0"
+      rpy="0 0 0" />
+    <axis xyz="0 0 -1" />
+  </joint>
+
+  <link name="right_motor">
+    <visual>
+      <geometry>
+        <box size="${x_motor_size} ${y_motor_size} ${z_motor_size}" />
+      </geometry>
+      <material name="blue" />
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 ${z_motor_size/2}" />
+      <geometry>
+        <box size="${x_motor_size} ${y_motor_size} ${z_motor_size}" />
+      </geometry>
+    </collision>
+
+    <xacro:inertial_box mass="${motor_mass}" x="${x_motor_size}" y="${y_motor_size}"
+      z="${z_motor_size}">
+      <origin xyz="0 0 ${z_motor_size/2}" />
+    </xacro:inertial_box>
+
+  </link>
+
+
   <!-- RIGHT WHEEL -->
   <joint name="right_wheel_joint" type="continuous">
-    <parent link="base_link" />
+    <parent link="right_motor" />
     <child link="right_wheel" />
-    <origin xyz="0 -${y_chassis_size/2 + drive_wheel_length/2} 0" rpy="${pi/2} 0 0" />
+    <origin xyz="0 ${y_motor_size} 0"
+      rpy="${pi/2} 0 0" />
     <axis xyz="0 0 -1" />
   </joint>
 

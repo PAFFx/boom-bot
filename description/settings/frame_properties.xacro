@@ -5,28 +5,43 @@
   <xacro:property name="x_chassis_size" value="0.5" />
   <xacro:property name="y_chassis_size" value="0.42" />
   <xacro:property name="z_chassis_size" value="0.14" />
-  <xacro:property name="chassis_mass" value="6" />
+  <xacro:property name="chassis_mass" value="4.4" />
+  <xacro:property name="x_handle_size" value="0.13" />
+  <xacro:property name="y_handle_size" value="0.42" />
+  <xacro:property name="z_handle_size" value="0.8" />
+  <xacro:property name="handle_mass" value="3" />
+
 
   <!-- DRIVE WHEELS-->
   <xacro:property name="drive_wheel_radius" value="0.102" />
   <xacro:property name="drive_wheel_length" value="0.04" />
-  <xacro:property name="drive_wheel_mass" value="3" />
+  <xacro:property name="drive_wheel_mass" value="2" />
+
+  <!-- MOTOR -->
+  <xacro:property name="x_motor_size" value="0.05" />
+  <xacro:property name="y_motor_size" value="0.05" />
+  <xacro:property name="z_motor_size" value="0.05" />
+  <xacro:property name="motor_mass" value="1" />
+
 
   <!-- CASTER WHEELS-->
-  <xacro:property name="caster_wheel_radius" value="0.065" />
+  <xacro:property name="caster_wheel_radius" value="0.055" />
   <xacro:property name="caster_wheel_length" value="0.02" />
   <xacro:property name="caster_wheel_mass" value="1" />
 
   <!-- LIDAR -->
+  <xacro:property name="x_lidar_base_size" value="0.15" />
+  <xacro:property name="y_lidar_base_size" value="0.20" />
+  <xacro:property name="z_lidar_base_size" value="0.05" />
   <xacro:property name="lidar_frame_radius" value="0.05" />
   <xacro:property name="lidar_frame_length" value="0.04" />
   <xacro:property name="lidar_mass" value="0.1" />
   <xacro:property name="lidar_samples" value="360" />
-  <xacro:property name="lidar_resolution" value="1" />
-  <xacro:property name="lidar_min_angle" value="-3.14" />
-  <xacro:property name="lidar_max_angle" value="3.14" />
-  <xacro:property name="lidar_min_range" value="0.3" />
-  <xacro:property name="lidar_max_range" value="12" />
+  <xacro:property name="lidar_resolution" value="0.0174533" />
+  <xacro:property name="lidar_min_angle" value="-1.57" />
+  <xacro:property name="lidar_max_angle" value="1.57" />
+  <xacro:property name="lidar_min_range" value="0.12" />
+  <xacro:property name="lidar_max_range" value="3.5" />
   <xacro:property name="lidar_range_resolution" value="0.01" />
 
   <!-- CAMERA -->
@@ -46,11 +61,11 @@
 
 
   <!-- SPEED -->
-  <xacro:property name="max_wheel_torque" value="100" />
-  <xacro:property name="max_acceleration" value="5.0" />
+  <xacro:property name="max_wheel_torque" value="0.883" />
+  <xacro:property name="max_acceleration" value="1.48" />
 
   <!-- ROTATION SPEED -->
-  <xacro:property name="wheel_max_speed" value="4.18" /> 
-  <xacro:property name="wheel_min_speed" value="-4.18" />
+  <xacro:property name="wheel_max_speed" value="1.848" />
+  <xacro:property name="wheel_min_speed" value="-1.848" />
 
 </robot>
