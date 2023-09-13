@@ -20,8 +20,6 @@ def launch_setup(context: LaunchContext):
 
 def generate_launch_description():
 
-
-
     return LaunchDescription([
         DeclareLaunchArgument(
             'port',
@@ -33,6 +31,6 @@ def generate_launch_description():
             default_value='laser_frame',
             description='laser frame name'
             ),
-        OpaqueFunction(function=launch_setup)
+        OpaqueFunction(function=launch_setup),
 
         ])
