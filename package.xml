@@ -30,6 +30,7 @@
 
   <!-- NAVIGATION -->
   <exec_depend>navigation2</exec_depend>
+  <exec_depend>laser_filters</exec_depend>
 
   <!-- SLAM -->
   <exec_depend>slam_toolbox</exec_depend>
