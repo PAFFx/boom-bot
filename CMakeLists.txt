@@ -38,6 +38,7 @@ ament_python_install_package(${PROJECT_NAME})
 # Install Python executables
 install(PROGRAMS
   scripts/motor_driver.py
+  scripts/goal_offset_nav.py
   DESTINATION lib/${PROJECT_NAME}
 )
  
