@@ -46,7 +46,7 @@ class NeuralNetNav(Node):
             self.state = "wait"
             self.wait_state()
 
-        elif op == "follow" and self.navigator.getResult() == TaskResult.SUCCEEDED:
+        elif op == "notfound" and self.navigator.getResult() == TaskResult.SUCCEEDED:
             self.state = "spin"
             self.navigator.spin()
 
