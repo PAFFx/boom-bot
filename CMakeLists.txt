@@ -39,6 +39,7 @@ ament_python_install_package(${PROJECT_NAME})
 install(PROGRAMS
   scripts/motor_driver.py
   scripts/visual_nav.py
+  scripts/neural_net_nav.py
   DESTINATION lib/${PROJECT_NAME}
 )
  
