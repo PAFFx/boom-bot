@@ -79,12 +79,7 @@ class NeuralNetNav(Node):
         return x_pos, y_pos
 
     def wait_state(self):
-        self.last_goal_msg.header.stamp = self.navigator.get_clock().now()
-        self.last_goal_msg.header.frame_id = self.frame_id
-        self.last_goal_msg.pose.position.x = 0
-        self.last_goal_msg.pose.position.y = 0
-
-        self.navigator.goToPose([self.last_goal_msg])
+        self.navigator.cancelTask()
     
         
 
