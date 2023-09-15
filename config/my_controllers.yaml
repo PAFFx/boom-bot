@@ -32,7 +32,7 @@ diff_cont:
     odom_frame_id: /odom
     # pose_covariance_diagonal: x
     # twist_covariance_diagonal: x
-    # enable_odom_tf: x
+    enable_odom_tf: true
 
     # cmd_vel_timeout: x
     # publish_limited_velocity: x
