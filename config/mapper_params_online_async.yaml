@@ -1,4 +1,4 @@
-slam_toolbox:
+lam_toolbox:
   ros__parameters:
     # Plugin params
     solver_plugin: solver_plugins::CeresSolver
@@ -25,7 +25,7 @@ slam_toolbox:
 
     debug_logging: false
     throttle_scans: 1
-    transform_publish_period: 0.02 #if 0 never publishes odometry
+    transform_publish_period: 0.0 #if 0 never publishes odometry
     map_update_interval: 5.0
     resolution: 0.0174
     max_laser_range: 20.0 #for rastering images

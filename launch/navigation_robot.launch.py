@@ -36,7 +36,7 @@ def generate_launch_description():
                     )],
             launch_arguments={"slam_params_file":os.path.join(
                 get_package_share_directory(package_name), "config", "navigation_params_online_async.yaml"
-                )}.items()
+                ), "use_sim_time":"false"}.items()
             )
 
     amcl = IncludeLaunchDescription(
