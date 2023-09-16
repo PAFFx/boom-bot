@@ -18,7 +18,7 @@ from builtin_interfaces.msg import Time
 def construct_depth_image(raw, width, height):
     arr = np.array(raw, dtype=np.uint8).reshape(-1, 2)
     arr = arr[:, 0] + (arr[:, 1] * 2**8)
-    arr = arr.reshape(height, width)
+    arr = arr.reshape(width, height)
     return arr
 
 class NeuralNetNav(Node):
@@ -29,7 +29,7 @@ class NeuralNetNav(Node):
         self.state = "wait" # wait, follow, stop
         self.command = VisualNav()
         self.distance = 0.0
-        self.distance_threshold = 1.0 # metres
+        self.distance_threshold = 1000.0 # millimetres
         self.horizontal_threshold = 50.0 # pixels
 
         self.get_logger().info("wait")
@@ -84,8 +84,6 @@ class NeuralNetNav(Node):
 
     def depth_listener_callback(self, msg : Image):
         self.depth_data = construct_depth_image(msg.data, msg.width, msg.height)
-        cv2.imshow('Depth Image', self.depth_data)
-
 
     def nav_listener_callback(self, msg : VisualNav):
         self.command = msg
@@ -108,8 +106,7 @@ class NeuralNetNav(Node):
         horizontal_error = self.command.x - self.h_res/2
         depth = 0
         try: 
-            # depth = self.depth_data[(640*x_depth_pos + y_depth_pos) * 2]
-            depth = 100 # TODO: Implement depth
+            depth = self.depth_data[x_depth_pos, y_depth_pos]
         except:
             print("Error reading depth data")
         self.distance = depth
