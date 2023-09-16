@@ -30,35 +30,16 @@ def generate_launch_description():
             launch_arguments={"port":laser_port, "laser_frame":laser_frame}.items()
             )
 
-    costmap = IncludeLaunchDescription(
+    depth = IncludeLaunchDescription(
                 [os.path.join(
-                    get_package_share_directory(package_name), "launch","online_async.launch.py"
+                    get_package_share_directory(package_name), "launch","camera.launch.py"
                     )],
-            launch_arguments={"slam_params_file":os.path.join(
-                get_package_share_directory(package_name), "config", "navigation_params_online_async.yaml"
-                ), "use_sim_time":"false"}.items()
             )
 
-    amcl = IncludeLaunchDescription(
-                [os.path.join(
-                    get_package_share_directory(package_name), "launch","localization.launch.py"
-                    )],
-            launch_arguments={"map":os.path.join(
-                get_package_share_directory(package_name), "maps", "real_map_save.yaml"
-                )}.items()
-            )
-
-    navigation = IncludeLaunchDescription(
-                [os.path.join(
-                    get_package_share_directory(package_name), "launch","navigation.launch.py"
-                    )],
-                )
-    #
     neural_net_nav = Node(
             package=package_name,
             executable="neural_net_nav.py",
             )
-
 
     
 
@@ -75,8 +56,6 @@ def generate_launch_description():
             ),
         robot_launch,
         lidar,
-        costmap,
-        amcl,
+        depth,
         neural_net_nav,
-        navigation,
         ])
