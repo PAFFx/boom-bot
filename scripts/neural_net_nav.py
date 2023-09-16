@@ -90,7 +90,7 @@ class NeuralNetNav(Node):
 
 
     def depth_listener_callback(self, msg : Image):
-        self.depth_data = construct_depth_image(msg.data)
+        self.depth_data = construct_depth_image(msg.data, msg.width, msg.height)
         cv2.imshow('Depth Image', self.depth_data)
 
 
