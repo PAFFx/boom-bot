@@ -28,7 +28,6 @@ class NeuralNetNav(Node):
 
         self.state = "wait" # wait, follow, stop
         self.command = VisualNav()
-        self.distance = 0.0
         self.distance_threshold = 1000.0 # millimetres
         self.horizontal_threshold = 50.0 # pixels
 
@@ -45,13 +44,13 @@ class NeuralNetNav(Node):
             history=QoSHistoryPolicy.KEEP_LAST,
             depth=1
         )
-        print("create nav subscription")
+        self.get_logger().info("create nav subscription")
         self.nav_subscription = self.create_subscription(
             VisualNav,
             '/visual_nav',
             self.nav_listener_callback,
             10)
-        print("create depth subscription")
+        self.get_logger().info("create depth subscription")
         self.depth_subscription = self.create_subscription(
                 Image,
                 '/camera/depth/image_raw',
@@ -72,14 +71,14 @@ class NeuralNetNav(Node):
 
     def timer_stateful_action_callback(self):
         if self.state == "follow":
-            print("follow")
+            self.get_logger().info("follow")
             self.follow_state()
         elif self.state == "wait":
-            print("wait")
+            self.get_logger().info("wait")
             self.wait_state()
         
         elif self.state == "notfound":
-            print("notfound")
+            self.get_logger().info("notfound")
 
 
     def depth_listener_callback(self, msg : Image):
@@ -96,36 +95,35 @@ class NeuralNetNav(Node):
             self.state = "notfound"
 
         else:
-            print("Invalid operation command")
+            self.get_logger().info("operation not support")
 
 
     def follow_state(self):
         # read depth
         x_depth_pos = int((self.command.x / self.h_res) * 640)
         y_depth_pos = int((self.command.y / self.v_res) * 480)
+
         horizontal_error = self.command.x - self.h_res/2
         depth = 0
         try: 
             depth = self.depth_data[x_depth_pos, y_depth_pos]
         except:
-            print("Error reading depth data")
-        self.distance = depth
+            self.get_logger().info("Error reading depth data")
 
         twist_msg = Twist()
         # linear + angular
-        if self.distance > self.distance_threshold and horizontal_error > self.horizontal_threshold or horizontal_error < -self.horizontal_threshold :
+        if depth > self.distance_threshold and (horizontal_error > self.horizontal_threshold or horizontal_error < -self.horizontal_threshold ):
             twist_msg.linear.x = 0.5
             twist_msg.angular.z = - (horizontal_error / self.h_res) * 1.0
         # linear
-        elif self.distance > self.distance_threshold:
+        elif depth > self.distance_threshold:
             twist_msg.linear.x = 1.0
         # angular
         elif horizontal_error > self.horizontal_threshold or horizontal_error < -self.horizontal_threshold:
             twist_msg.angular.z = -(horizontal_error / self.h_res ) * 1.0
 
         
-        print("x:",twist_msg.linear.x)
-        print("z:",twist_msg.angular.z)
+        self.get_logger().info(f"x: {twist_msg.linear.x} z: {twist_msg.angular.z}")
         self.cmd_vel_publisher.publish(
                 twist_msg
                 )
