@@ -14,20 +14,10 @@ from launch_ros.actions import Node
 def generate_launch_description():
     package_name = "boom_bot"
 
-    laser_frame = LaunchConfiguration('laser_frame_id')
-    laser_port = LaunchConfiguration('laser_port')
-
     robot_launch = IncludeLaunchDescription(
                 [os.path.join(
                     get_package_share_directory(package_name), "launch","launch_robot.launch.py"
                     )]
-            )
-
-    lidar = IncludeLaunchDescription(
-                [os.path.join(
-                    get_package_share_directory(package_name), "launch","hlslidar.launch.py"
-                    )],
-            launch_arguments={"port":laser_port, "laser_frame":laser_frame}.items()
             )
 
     depth = IncludeLaunchDescription(
@@ -44,18 +34,7 @@ def generate_launch_description():
     
 
     return LaunchDescription([
-        DeclareLaunchArgument(
-            'laser_port',
-            default_value='/dev/ttyUSB1',
-            description='Lidar\'s port'
-            ),
-        DeclareLaunchArgument(
-            'laser_frame_id',
-            default_value='laser_frame',
-            description='laser frame name'
-            ),
         robot_launch,
-        lidar,
         depth,
         neural_net_nav,
         ])
