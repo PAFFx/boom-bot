@@ -21,6 +21,15 @@ def construct_depth_image(raw, width, height):
     arr = arr.reshape(width, height)
     return arr
 
+def average_depth(depth_image : np.ndarray, x,y) -> float:
+    print(depth_image.shape[0])
+    print(depth_image.shape[1])
+    depth_image = np.pad(depth_image,(25,), mode='mean')
+    res = np.average(depth_image[x-25:x+25, y-25:y+25])
+
+    return res.item()
+    
+
 class NeuralNetNav(Node):
     
     def __init__(self):
@@ -28,8 +37,8 @@ class NeuralNetNav(Node):
 
         self.state = "wait" # wait, follow, stop
         self.command = VisualNav()
-        self.distance_threshold = 1000.0 # millimetres
-        self.horizontal_threshold = 50.0 # pixels
+        self.distance_threshold = 1500.0 # millimetres
+        self.horizontal_threshold = 150.0 # pixels
 
         self.get_logger().info("wait")
 
@@ -106,24 +115,26 @@ class NeuralNetNav(Node):
         horizontal_error = self.command.x - self.h_res/2
         depth = 0
         try: 
-            depth = self.depth_data[x_depth_pos, y_depth_pos]
+            # depth = self.depth_data[x_depth_pos, y_depth_pos]
+            depth = 3000
+            self.get_logger().info(f"depth: {depth}")
         except:
             self.get_logger().info("Error reading depth data")
 
         twist_msg = Twist()
-        # linear + angular
-        if depth > self.distance_threshold and (horizontal_error > self.horizontal_threshold or horizontal_error < -self.horizontal_threshold ):
-            twist_msg.linear.x = 0.5
-            twist_msg.angular.z = - (horizontal_error / self.h_res) * 1.0
-        # linear
-        elif depth > self.distance_threshold:
-            twist_msg.linear.x = 1.0
+
         # angular
-        elif horizontal_error > self.horizontal_threshold or horizontal_error < -self.horizontal_threshold:
+        if horizontal_error > (self.h_res - self.horizontal_threshold) or horizontal_error < -(self.h_res -self.horizontal_threshold):
             twist_msg.angular.z = -(horizontal_error / self.h_res ) * 1.0
 
+        # linear + angular
+        elif depth > self.distance_threshold:
+            twist_msg.linear.x = 0.2
+            twist_msg.angular.z = - (horizontal_error / self.h_res) * 1.0
+
         
-        self.get_logger().info(f"x: {twist_msg.linear.x} z: {twist_msg.angular.z}")
+        self.get_logger().info(f"x: {self.command.x}")
+        self.get_logger().info(f"linear: {twist_msg.linear.x} angular: {twist_msg.angular.z}")
         self.cmd_vel_publisher.publish(
                 twist_msg
                 )
