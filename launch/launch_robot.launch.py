@@ -23,14 +23,14 @@ def generate_launch_description():
             ),
             launch_arguments={"sim_mode":"false", "use_ros2_control":"true"}.items()
         )
-
-    joystick = IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(
-                [os.path.join(
-                    get_package_share_directory(package_name), "launch", "joystick.launch.py"
-                    )],
-                )
-            )
+    #
+    # joystick = IncludeLaunchDescription(
+    #         PythonLaunchDescriptionSource(
+    #             [os.path.join(
+    #                 get_package_share_directory(package_name), "launch", "joystick.launch.py"
+    #                 )],
+    #             )
+    #         )
 
     twist_mux_params= os.path.join(get_package_share_directory(package_name), "config", "twist_mux.yaml")
     twist_mux = Node(
@@ -97,7 +97,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         rsp,
-        joystick,
+        # joystick,
         twist_mux,
         delayed_controller_manager,
         delayed_diff_drive_spawner,
