@@ -13,7 +13,6 @@ from geometry_msgs.msg import PoseStamped, Twist
 from sensor_msgs.msg import Image 
 from builtin_interfaces.msg import Time
 
-from nav2_simple_commander.robot_navigator import BasicNavigator, TaskResult, Spin
 
 class NeuralNetNav(Node):
     
@@ -23,7 +22,9 @@ class NeuralNetNav(Node):
         self.state = "wait" # wait, follow, stop
         self.command = VisualNav()
         self.distance = 0.0
-        self.distance_treshold = 1.0
+        self.distance_threshold = 1.0 # metres
+        self.horizontal_threshold = 50.0 # pixels
+
         self.get_logger().info("wait")
 
         # Horizontal FOV : 60 deg, Horizontal Res : 1280
@@ -110,14 +111,14 @@ class NeuralNetNav(Node):
 
         twist_msg = Twist()
         # linear + angular
-        if self.distance > self.distance_treshold and horizontal_error != 0:
+        if self.distance > self.distance_threshold and horizontal_error > self.horizontal_threshold or horizontal_error < -self.horizontal_threshold :
             twist_msg.linear.x = 0.5
             twist_msg.angular.z = - (horizontal_error / self.h_res) * 1.0
         # linear
-        elif self.distance > self.distance_treshold:
+        elif self.distance > self.distance_threshold:
             twist_msg.linear.x = 1.0
         # angular
-        elif horizontal_error != 0:
+        elif horizontal_error > self.horizontal_threshold or horizontal_error < -self.horizontal_threshold:
             twist_msg.angular.z = -(horizontal_error / self.h_res ) * 1.0
 
         
