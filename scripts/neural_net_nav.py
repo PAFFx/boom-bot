@@ -23,7 +23,7 @@ class NeuralNetNav(Node):
         self.state = "wait" # wait, follow, stop
         self.command = VisualNav()
         self.horizontal_threshold = 325.0 # pixels
-        self.timer_period = 0.08  #sec
+        self.timer_period = 0.01  #sec
         self.wakeup_limit = 5
 
 
