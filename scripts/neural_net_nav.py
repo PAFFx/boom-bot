@@ -24,8 +24,8 @@ def construct_depth_image(raw, width, height):
 def average_depth(depth_image : np.ndarray, x,y) -> float:
     print(depth_image.shape[0])
     print(depth_image.shape[1])
-    depth_image = np.pad(depth_image,(25,), mode='mean')
-    res = np.average(depth_image[x-25:x+25, y-25:y+25])
+    depth_image = np.pad(depth_image,(10,), mode='mean')
+    res = np.average(depth_image[x-10:x+10, y-10:y+10])
 
     return res.item()
     
@@ -37,8 +37,8 @@ class NeuralNetNav(Node):
 
         self.state = "wait" # wait, follow, stop
         self.command = VisualNav()
-        self.distance_threshold = 2000.0 # millimetres
-        self.horizontal_threshold = 150.0 # pixels
+        self.distance_threshold = 500.0 # millimetres
+        self.horizontal_threshold = 300.0 # pixels
 
         self.get_logger().info("wait")
 
@@ -88,6 +88,7 @@ class NeuralNetNav(Node):
         
         elif self.state == "notfound":
             self.get_logger().info("notfound")
+            self.wait_state()
 
 
     def depth_listener_callback(self, msg : Image):
@@ -116,6 +117,7 @@ class NeuralNetNav(Node):
         depth = 0
         try: 
             depth = self.depth_data[x_depth_pos, y_depth_pos]
+            # depth = average_depth(self.depth_data, x_depth_pos, y_depth_pos)
             # depth = 3000
             self.get_logger().info(f"depth: {depth}")
         except:
@@ -124,13 +126,20 @@ class NeuralNetNav(Node):
         twist_msg = Twist()
 
         # angular
-        if horizontal_error > (self.h_res - self.horizontal_threshold) or horizontal_error < -(self.h_res -self.horizontal_threshold):
-            twist_msg.angular.z = -(horizontal_error / self.h_res ) * 1.0
+        if horizontal_error > (self.h_res/2 - self.horizontal_threshold):
+            twist_msg.linear.x = 0.0
+            twist_msg.angular.z = -1.0 # right
+        elif horizontal_error < -(self.h_res/2 -self.horizontal_threshold):
+            twist_msg.linear.x = 0.0
+            twist_msg.angular.z = 1.0 # left
 
         # linear + angular
         elif depth > self.distance_threshold:
             twist_msg.linear.x = 0.2
             twist_msg.angular.z = - (horizontal_error / self.h_res) * 1.0
+        else:
+            twist_msg.linear.x = 0.0
+            twist_msg.angular.z = 0.0
 
         
         self.get_logger().info(f"x: {self.command.x}")
