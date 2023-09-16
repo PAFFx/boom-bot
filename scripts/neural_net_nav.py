@@ -7,12 +7,26 @@ from rclpy.duration import Duration
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy
 
 import numpy as np
+import cv2
 
 from custom_msgs.msg import VisualNav
 from geometry_msgs.msg import PoseStamped, Twist 
 from sensor_msgs.msg import Image 
 from builtin_interfaces.msg import Time
 
+
+def construct_depth_image(raw_depth_data, width, height):
+    # Convert the list to a numpy array
+    arr = np.array(raw_depth_data, dtype=np.uint8)
+
+    # Reshape the array to have two columns (low and high bytes)
+    arr = arr.reshape(-1, 2)
+
+    # Combine the low and high bytes
+    combined = arr[:, 0] | (arr[:, 1] << 8)
+
+    # reshape depth_1d_array to size width * height
+    return combined.reshape(width, height)
 
 class NeuralNetNav(Node):
     
@@ -76,10 +90,8 @@ class NeuralNetNav(Node):
 
 
     def depth_listener_callback(self, msg : Image):
-        self.depth_data = msg.data
-        arr = np.frombuffer(self.depth_data, dtype=np.uint16)
-        self.get_logger().info(arr.shape)
-        # self.get_logger().info(len(self.depth_data))
+        self.depth_data = construct_depth_image(msg.data)
+        cv2.imshow('Depth Image', self.depth_data)
 
 
     def nav_listener_callback(self, msg : VisualNav):
