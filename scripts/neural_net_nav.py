@@ -6,6 +6,7 @@ from rclpy.node import Node, math
 from rclpy.duration import Duration
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy
 
+import numpy as np
 
 from custom_msgs.msg import VisualNav
 from geometry_msgs.msg import PoseStamped, Twist 
@@ -75,7 +76,8 @@ class NeuralNetNav(Node):
 
     def depth_listener_callback(self, msg : Image):
         self.depth_data = msg.data
-        print(float(msg.data))
+        arr = np.frombuffer(self.depth_data, dtype=np.uint16)
+        self.get_logger().info(arr.shape)
         # self.get_logger().info(len(self.depth_data))
 
 
