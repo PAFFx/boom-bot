@@ -15,18 +15,11 @@ from sensor_msgs.msg import Image
 from builtin_interfaces.msg import Time
 
 
-def construct_depth_image(raw_depth_data, width, height):
-    # Convert the list to a numpy array
-    arr = np.array(raw_depth_data, dtype=np.uint8)
-
-    # Reshape the array to have two columns (low and high bytes)
-    arr = arr.reshape(-1, 2)
-
-    # Combine the low and high bytes
-    combined = arr[:, 0] | (arr[:, 1] << 8)
-
-    # reshape depth_1d_array to size width * height
-    return combined.reshape(width, height)
+def construct_depth_image(raw, width, height):
+    arr = np.array(raw, dtype=np.uint8).reshape(-1, 2)
+    arr = arr[:, 0] + (arr[:, 1] * 2**8)
+    arr = arr.reshape(height, width)
+    return arr
 
 class NeuralNetNav(Node):
     
