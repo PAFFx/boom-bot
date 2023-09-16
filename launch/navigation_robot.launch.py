@@ -53,6 +53,11 @@ def generate_launch_description():
                     get_package_share_directory(package_name), "launch","navigation.launch.py"
                     )],
                 )
+    #
+    neural_net_nav = Node(
+            package=package_name,
+            executable="neural_net_nav.py",
+            )
 
 
     
@@ -72,5 +77,6 @@ def generate_launch_description():
         lidar,
         costmap,
         amcl,
-        navigation
+        neural_net_nav,
+        navigation,
         ])
